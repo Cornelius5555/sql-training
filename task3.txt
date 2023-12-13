@@ -1,0 +1,5 @@
+SELECT Products.productname, shippers.shippername
+FROM Orderdetails
+JOIN orders ON orders.ordeid=orderdtails.orderid
+JOIN products ON products.productid=orderdetails.productid
+JOIN shippers ON shippers.shipperid=orders.shipperid
