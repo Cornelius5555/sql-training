@@ -1,0 +1,36 @@
+3. SELECT Products.productname, shippers.shippername
+   FROM (((Orderdetails
+   INNER JOIN orders ON orders.ordeid=orderdtails.orderid)
+   INNER JOIN products ON products.productid=orderdetails.productid)
+   INNER JOIN shippers ON shippers.shipperid=orders.shipperid)
+
+5. SELECT * FROM Customers  
+   WHERE CustomerName LIKE '%son%';
+
+9. SELECT sum(orderdetails.quantity * products.price) as totalsales
+   FROM Orderdetails
+   INNER JOIN products ON products.productid=orderdetails.productid
+
+2. SELECT orders.orderid, orders.orderdate, customers.customername, customers.city, customers.address, customers.postalcode,             shippers.shippername, 
+   products.productname, orderdetails.quantity
+   FROM  ((((orderdetails
+   INNER JOIN orders ON orders.orderid=orderdetails.orderid)
+   INNER JOIN customers ON customers.customerid=orders.customerid)
+   INNER JOIN shippers ON shippers.shipperid=orders.shipperid)
+   INNER JOIN products ON products.productid=orderdetails.productid)
+4. SELECT Shippers.ShipperName,COUNT(Orders.OrderID) AS NumberOfOrders FROM Orders
+   LEFT JOIN Shippers ON Orders.ShipperID = Shippers.ShipperID
+   GROUP BY ShipperName;
+
+7. SELECT customers.customername, sum(orderdetails.quantity * products.price) AS totalspent
+   FROM (((orderdetails
+   INNER JOIN orders ON orders.orderid=orderdetails.orderid)
+   INNER JOIN products ON products.productid=orderdetails.productid)
+   INNER JOIN customers ON customers.customerid=orders.customerid)
+   group by customername 
+
+8. SELECT TOP 1 suppliers.suppliername, sum(orderdetails.quantity) 
+   FROM ((orderdetails
+   INNER JOIN products ON products.productid=orderdetails.productid)
+   INNER JOIN suppliers ON suppliers.supplierid=products.supplierid)
+   GROUP BY suppliers.suppliername order by sum(orderdetails.quantity)  desc;
