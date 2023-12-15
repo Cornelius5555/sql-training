@@ -34,3 +34,18 @@
    INNER JOIN products ON products.productid=orderdetails.productid)
    INNER JOIN suppliers ON suppliers.supplierid=products.supplierid)
    GROUP BY suppliers.suppliername order by sum(orderdetails.quantity)  desc;
+
+
+postgres task:
+1. SELECT products.name, sum(products.selling_price * sales.quantity) as total_sales
+	FROM sales
+	join products on products.id=sales.pid
+	group by products.name
+	order by total_sales desc;
+
+1b. SELECT products.name, sales.id, sales.created_at,
+((products.selling_price * sales.quantity) - (products.buying_price * sales.quantity))
+as profit
+	FROM sales
+	join products on products.id=sales.pid
+	order by profit desc;
