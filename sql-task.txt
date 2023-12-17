@@ -62,3 +62,15 @@ remaining_stock = SELECT products.name, products.stock_quantity - sum(sales.quan
                   from sales 
                   join products on products.id=sales.pid
                   group by products.id
+
+sales_returns: SELECT products.name, returns.reasons
+               from returns
+               join sales on sales.id=returns.said
+               join products on products.id=sales.pid
+
+
+highest_supplier: SELECT suppliers.name, sum(products.stock_quantity) total_supplied
+                  from products
+                  join suppliers on suppliers.id=products.sid
+                  group by suppliers.name
+                  order by total_supplied desc
