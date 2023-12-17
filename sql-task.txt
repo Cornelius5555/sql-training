@@ -49,3 +49,16 @@ as profit
 	FROM sales
 	join products on products.id=sales.pid
 	order by profit desc;
+
+tatal_sales: SELECT products.name, sum(sales.quantity) as total_quantity
+             FROM sales
+             join products on products.id=sales.pid
+             GROUP BY products.name
+             ORDER BY total_quantity desc;
+
+
+
+remaining_stock = SELECT products.name, products.stock_quantity - sum(sales.quantity)
+                  from sales 
+                  join products on products.id=sales.pid
+                  group by products.id
